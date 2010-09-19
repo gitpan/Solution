@@ -2,7 +2,7 @@ package Solution;
 {
     use strict;
     use warnings;
-    our $MAJOR = 0.0; our $MINOR = 0; our $DEV = 1; our $VERSION = sprintf('%1.3f%03d' . ($DEV ? (($DEV < 0 ? '' : '_') . '%03d') : ('')), $MAJOR, $MINOR, abs $DEV);
+    our $MAJOR = 0.0; our $MINOR = 0; our $DEV = -2; our $VERSION = sprintf('%1.3f%03d' . ($DEV ? (($DEV < 0 ? '' : '_') . '%03d') : ('')), $MAJOR, $MINOR, abs $DEV);
 
     #
     use Solution::Document;
@@ -194,10 +194,9 @@ covered by the Creative Commons Attribution-Share Alike 3.0 License.  See
 http://creativecommons.org/licenses/by-sa/3.0/us/legalcode.  For
 clarification, see http://creativecommons.org/licenses/by-sa/3.0/us/.
 
-=for git $Id: Solution.pm 92a1cb0 2010-09-19 00:52:32Z sanko@cpan.org $
+=for git $Id: Solution.pm 7f57e32 2010-09-19 02:51:25Z sanko@cpan.org $
 
 =cut
-
 {
     { package Solution::Drop; }
     { package Solution::Extensions; }
@@ -205,6 +204,35 @@ clarification, see http://creativecommons.org/licenses/by-sa/3.0/us/.
     { package Solution::Module_Ex; }
     { package Solution::Strainer; }
     { package Solution::Tag::IfChanged; }
-    { package Solution::Tag::Include; }
 }
 1;
+__END__
+Module                            Purpose/Notes              Inheritance
+-----------------------------------------------------------------------------------------------------------------------------------------
+Solution                          | [done]                    |
+    Solution::Block               |                           |
+    Solution::Condition           | [done]                    |
+    Solution::Context             | [done]                    |
+    Solution::Document            | [done]                    |
+    Solution::Drop                |                           |
+    Solution::Errors              | [done]                    |
+    Solution::Extensions          |                           |
+    Solution::FileSystem          |                           |
+    Solution::HTMLTags            |                           |
+    Solution::Module_Ex           |                           |
+    Solution::StandardFilters     | [done]                    |
+    Solution::Strainer            |                           |
+    Solution::Tag                 |                           |
+        Solution::Tag::Assign     | [done]                    | Solution::Tag
+        Solution::Tag::Capture    | [done] extended assign    | Solution::Tag
+        Solution::Tag::Case       |                           |
+        Solution::Tag::Comment    | [done]                    | Solution::Tag
+        Solution::Tag::Cycle      |                           |
+        Solution::Tag::For        | [done] for loop construct | Solution::Tag
+        Solution::Tag::If         | [done] if/elsif/else      | Solution::Tag
+        Solution::Tag::IfChanged  |                           |
+        Solution::Tag::Include    | [done]                    | Solution::Tag
+        Solution::Tag::Unless     | [done]                    | Solution::Tag::If
+    Solution::Template            |                           |
+    Solution::Variable            | [done] echo statement     | Solution::Document
+Solution::Utility       *         | [temp] Non OO bin         |

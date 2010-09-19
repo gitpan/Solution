@@ -3,7 +3,7 @@ use warnings;
 use Module::Build;
 use lib 'inc';
 use File::Find qw[find];
-our $MAJOR = 0.0; our $MINOR = 0; our $DEV = -1; our $VERSION = sprintf('%1.3f%03d' . ($DEV ? (($DEV < 0 ? '' : '_') . '%03d') : ('')), $MAJOR, $MINOR, abs $DEV);
+our $MAJOR = 0.0; our $MINOR = 0; our $DEV = -2; our $VERSION = sprintf('%1.3f%03d' . ($DEV ? (($DEV < 0 ? '' : '_') . '%03d') : ('')), $MAJOR, $MINOR, abs $DEV);
 $|++;
 my $automated_testing = $ENV{'AUTOMATED_TESTING'}
     || $ENV{'PERL_MM_USE_DEFAULT'};
@@ -23,8 +23,9 @@ my $mb = $class->new(
     dist_author    => 'Sanko Robinson <sanko@cpan.org>',
     dist_version   => $VERSION,
     dist_abstract  => 'A Simple, Stateless Template System',
-    requires       => {perl => 5.006001},
+    requires       => {perl => 5.006001, 'File::Spec' => 0},
     build_requires => {'File::Find'    => 0,
+                       'File::Spec'    => 0,
                        'Module::Build' => '0.36',
                        perl            => 5.006001,
                        'Test::More'    => '0.94',
@@ -78,4 +79,4 @@ sub find_cb {
     return push @tests, $File::Find::name;
 }
 
-# $Id: Build.PL 92a1cb0 2010-09-19 00:52:32Z sanko@cpan.org $
+# $Id: Build.PL 7f57e32 2010-09-19 02:51:25Z sanko@cpan.org $

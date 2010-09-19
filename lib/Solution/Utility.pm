@@ -2,7 +2,7 @@ package Solution::Utility;
 {
     use strict;
     use warnings;
-    our $MAJOR = 0.0; our $MINOR = 0; our $DEV = 1; our $VERSION = sprintf('%1.3f%03d' . ($DEV ? (($DEV < 0 ? '' : '_') . '%03d') : ('')), $MAJOR, $MINOR, abs $DEV);
+    our $MAJOR = 0.0; our $MINOR = 0; our $DEV = -1; our $VERSION = sprintf('%1.3f%03d' . ($DEV ? (($DEV < 0 ? '' : '_') . '%03d') : ('')), $MAJOR, $MINOR, abs $DEV);
     our $FilterSeparator = qr[\s*\|\s*];
     my $ArgumentSeparator = qr[,];
     our $FilterArgumentSeparator    = qr[:];
@@ -81,6 +81,6 @@ covered by the Creative Commons Attribution-Share Alike 3.0 License.  See
 http://creativecommons.org/licenses/by-sa/3.0/us/legalcode.  For
 clarification, see http://creativecommons.org/licenses/by-sa/3.0/us/.
 
-=for git $Id: Utility.pm e610e64 2010-09-18 20:43:30Z sanko@cpan.org $
+=for git $Id: Utility.pm 7f57e32 2010-09-19 02:51:25Z sanko@cpan.org $
 
 =cut

@@ -3,7 +3,7 @@ package Solution::Tag;
     use strict;
     use warnings;
     our @ISA = qw[Solution::Document];
-    our $MAJOR = 0.0; our $MINOR = 0; our $DEV = 1; our $VERSION = sprintf('%1.3f%03d' . ($DEV ? (($DEV < 0 ? '' : '_') . '%03d') : ('')), $MAJOR, $MINOR, abs $DEV);
+    our $MAJOR = 0.0; our $MINOR = 0; our $DEV = -2; our $VERSION = sprintf('%1.3f%03d' . ($DEV ? (($DEV < 0 ? '' : '_') . '%03d') : ('')), $MAJOR, $MINOR, abs $DEV);
     sub tag             { return $_[0]->{'tag_name'}; }
     sub end_tag         { return $_[0]->{'end_tag'} || undef; }
     sub conditional_tag { return $_[0]->{'conditional_tag'} || undef; }
@@ -90,6 +90,10 @@ TODO
 TODO
 
 =head2 C<capture>
+
+TODO
+
+=head2 C<include>
 
 TODO
 
@@ -185,6 +189,9 @@ This will print a random integer between C<0> and C<30>.
 
 =head2 Creating Your Own Tag Blocks
 
+If you just want a quick sample, see C<examples/custom_tag.pl>. There you'll
+find an example C<{^% dump var %}> tag named C<SolutionX::Tag::Dump>.
+
 Block-like tags are very similar to
 L<simple|Solution::Tag/"Create Your Own Tags">. Inherit from
 L<Solution::Tag|Solution::Tag> and register your block
@@ -275,6 +282,6 @@ covered by the Creative Commons Attribution-Share Alike 3.0 License.  See
 http://creativecommons.org/licenses/by-sa/3.0/us/legalcode.  For
 clarification, see http://creativecommons.org/licenses/by-sa/3.0/us/.
 
-=for git $Id: Tag.pm 92a1cb0 2010-09-19 00:52:32Z sanko@cpan.org $
+=for git $Id: Tag.pm 7f57e32 2010-09-19 02:51:25Z sanko@cpan.org $
 
 =cut
