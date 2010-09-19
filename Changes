@@ -1,0 +1,26 @@
+Version 0.000000001 | 2010-09-19 00:52:32Z (Sun, 19 Sep 2010) | 92a1cb0
+
+    API Changes/Compatibility Information:
+     * ...see below
+
+    Resolved Issues/Bug Fixes:
+     * ...see below
+
+    Internal/Behavioral Changes:
+     * It actually exists
+
+    Documentation/Sample Code/Test Suite:
+     * ...see above
+
+    Notes:
+     * This is based on the Ruby Liquid library. See the sections entitled
+       "Getting Started" and "Ugh! Why a new Top Level Namespace?" in
+       Solution and just about everything in Solution::Tag.
+
+_ -.-. .... .- -. --. . ... _________________________________________
+For more information, see the commit log:
+    http://github.com/sanko/solution/commits/
+
+$Ver: 0.000000001 $ from git $Rev: 92a1cb0 $
+$Date: 2010-09-19 00:52:32Z (Sun, 19 Sep 2010) $
+$Url: http://github.com/sanko/solution/tree/raw/master/Changes $
