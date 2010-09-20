@@ -3,7 +3,7 @@ use warnings;
 use Module::Build;
 use lib 'inc';
 use File::Find qw[find];
-our $MAJOR = 0.0; our $MINOR = 0; our $DEV = -2; our $VERSION = sprintf('%1.3f%03d' . ($DEV ? (($DEV < 0 ? '' : '_') . '%03d') : ('')), $MAJOR, $MINOR, abs $DEV);
+our $MAJOR = 0.0; our $MINOR = 0; our $DEV = -3; our $VERSION = sprintf('%1.3f%03d' . ($DEV ? (($DEV < 0 ? '' : '_') . '%03d') : ('')), $MAJOR, $MINOR, abs $DEV);
 $|++;
 my $automated_testing = $ENV{'AUTOMATED_TESTING'}
     || $ENV{'PERL_MM_USE_DEFAULT'};
@@ -65,8 +65,6 @@ my $mb = $class->new(
 );
 $mb->notes(automated_testing => $automated_testing       ? 1 : 0);
 $mb->notes(is_developer      => $is_developer            ? 1 : 0);
-$mb->notes(verbose           => $mb->args('messy')       ? 1 : 0);
-$mb->notes(interactive       => $mb->args('interactive') ? 1 : 0);
 $mb->notes(test_suite        => \@tests);
 $mb->notes(gmtime            => scalar gmtime);
 $mb->create_build_script;
@@ -79,4 +77,4 @@ sub find_cb {
     return push @tests, $File::Find::name;
 }
 
-# $Id: Build.PL 7f57e32 2010-09-19 02:51:25Z sanko@cpan.org $
+# $Id: Build.PL 4d4beee 2010-09-20 02:25:51Z sanko@cpan.org $

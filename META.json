@@ -105,15 +105,15 @@
       },
       "Solution::Tag" : {
          "file" : "lib/Solution/Tag.pm",
-         "version" : "0.000000002"
+         "version" : "0.000000003"
       },
       "Solution::Tag::Assign" : {
          "file" : "lib/Solution/Tag/Assign.pm",
-         "version" : "0.000000001"
+         "version" : "0.000000003"
       },
       "Solution::Tag::Capture" : {
          "file" : "lib/Solution/Tag/Capture.pm",
-         "version" : "0.000000001"
+         "version" : "0.000000003"
       },
       "Solution::Tag::Case" : {
          "file" : "lib/Solution/Tag/Case.pm",
@@ -121,15 +121,15 @@
       },
       "Solution::Tag::Comment" : {
          "file" : "lib/Solution/Tag/Comment.pm",
-         "version" : "0.000000001"
+         "version" : "0.000000003"
       },
       "Solution::Tag::Cycle" : {
          "file" : "lib/Solution/Tag/Cycle.pm",
-         "version" : "0.000000001"
+         "version" : "0.000000003"
       },
       "Solution::Tag::For" : {
          "file" : "lib/Solution/Tag/For.pm",
-         "version" : "0.000000001"
+         "version" : "0.000000003"
       },
       "Solution::Tag::If" : {
          "file" : "lib/Solution/Tag/If.pm",
@@ -141,7 +141,7 @@
       },
       "Solution::Tag::Include" : {
          "file" : "lib/Solution/Tag/Include.pm",
-         "version" : "0.000000002"
+         "version" : "0.000000003"
       },
       "Solution::Tag::Unless" : {
          "file" : "lib/Solution/Tag/Unless.pm",
@@ -153,11 +153,11 @@
       },
       "Solution::Utility" : {
          "file" : "lib/Solution/Utility.pm",
-         "version" : "0.000000001"
+         "version" : "0.000000003"
       },
       "Solution::Variable" : {
          "file" : "lib/Solution/Variable.pm",
-         "version" : "0.000000001"
+         "version" : "0.000000003"
       }
    },
    "release_status" : "stable",
@@ -176,5 +176,5 @@
       },
       "x_ChangeLog" : "http://github.com/sanko/solution/commits/"
    },
-   "version" : "0.000000002"
+   "version" : "0.000000003"
 }

@@ -46,18 +46,17 @@ Solution - A Simple, Stateless Template System
 =head1 Synopsis
 
     use Solution;
-
-    my $template = Solution::Template->new( );
-    $template->parse( # See Solution::Tag for more
-        '{%for x in (1..3) reversed %}{{x}}, {%endfor%}{{some.text}}'
+    my $template = Solution::Template->new();
+    $template->parse(    # See Solution::Tag for more examples
+          '{% for x in (1..3) reversed %}{{ x }}, {% endfor %}{{ some.text }}'
     );
-    print $template->render( { some => { text => 'Contact!' } } );
+    print $template->render({some => {text => 'Contact!'}}); # 3, 2, 1, Contact!
 
 =head1 Description
 
-L<Solution|/"Ugh! Why a new Top Level Namespace?"> is a template engine based
-on Liquid. The Liquid template engine was crafted for very specific
-requirements:
+L<Solution|/"'Solution to what?' or 'Ugh! Why a new Top Level Namespace?'"> is
+a template engine based on Liquid. The Liquid template engine was crafted for
+very specific requirements:
 
 =over 4
 
@@ -82,25 +81,83 @@ objects.
 It's very simple to get started with L<Solution|Solution>. Just as in Liquid,
 templates are built and used in two steps: Parse and Render.
 
-For an overview of the Liquid/Solution syntax, please read
-Liquid for Designers (it's linked to in the L<See Also|Solution/"See Also">
-section below).
+    my $sol = Solution::Template->new();  # Create a Solution::Template object
+    $sol->parse('Hi, {{name}}!');         # Parse and compile the template
+    $sol->render({name => 'Sanko'});      # Render the output => "Hi, Sanko!"
 
-    # Parses and compiles the template
-    my $template = Solution::Template->parse('Hi, {{name}}!');
-
-    # Renders the output => "Hi, Sanko!"
-    $template->render({ name => 'Sanko' });
+    # Or if you're in a hurry...
+    Solution::Template->parse('Hi, {{name}}!')->render({name => 'Sanko'});
 
 The C<parse> step creates a fully compiled template which can be re-used as
 often as you like. You can store it in memory or in a cache for faster
 rendering later.
 
-All parameters you want L<Solution> to work with have to be passed as
-parameters to the render method. L<Solution> is a closed ecosystem; it does
-not know about your local, instance, and global variables.
+All parameters you want Solution to work with have to be passed as parameters
+to the C<render> method. Solution is a closed ecosystem; it does not know
+about your local, instance, global, or environment variables.
 
-For more, see L<Solution::Tag>.
+For an expanded overview of the Liquid/Solution syntax, please see
+L<Solution::Tag> and read
+L<Liquid for Designers|http://wiki.github.com/tobi/liquid/liquid-for-designers>.
+
+=head1 Extending Solution
+
+Extending the Solution template engine for your needs is almost too simple.
+Keep reading.
+
+=head2 Custom Filters
+
+Filters are simple subs called when needed. They are not passed any state data
+by design and must return the modified content.
+
+TODO: I need to write Solution::Filter which will be POD with all sorts of
+info in it. Yeah.
+
+=head3 C<< Solution->register_filter( ... ) >>
+
+This registers a package which Solution will assume contains one or more
+filters.
+
+    # Register a package as a filter
+    Solution->register_filter( 'SolutionX::Filter::Amalgamut' );
+
+    # Or simply say...
+    Solution->register_filter( );
+    # ...and Solution will assume the filters are in the calling package
+
+=head3 C<< Solution->filters( ) >>
+
+Returns a list containing all the tags currently loaded for informational
+purposes.
+
+=head2 Custom Tags
+
+See the section entitled
+L<Extending Solution with Custom Tags|Solution::Tag/"Extending Solution with Custom Tags">
+in L<Solution::Tag> for more information.
+
+To assist with custom tag creation, Solution provides several basic tag types
+for subclassing and exposes the following methods:
+
+=head3 C<< Solution->register_tag( ... ) >>
+
+This registers a package which must contain (directly or through inheritance)
+both a C<parse> and C<render> method.
+
+    # Register a new tag which Solution will look for in the given package
+    Solution->register_tag( 'newtag', 'SolutionX::Tag::You're::It' );
+
+    # Or simply say...
+    Solution->register_tag( 'newtag' );
+    # ...and Solution will assume the new tag is in the calling package
+
+Pre-existing tags are replaced when new tags are registered with the same
+name. You may want to do this to override some functionality.
+
+=head3 C<< Solution->tags( ) >>
+
+Returns a hashref containing all the tags currently loaded for informational
+purposes.
 
 =head1 Why should I use Solution?
 
@@ -113,7 +170,7 @@ application, but don't want them to run insecure code on your server.
 
 =item * You like Smarty-style template engines.
 
-=item * You need a template engine which does HTML just as well as emails.
+=item * You need a template engine which does HTML just as well as email.
 
 =item * You don't like the markup language of your current template engine.
 
@@ -127,74 +184,58 @@ I<Doctor Who>.
 
 =over 4
 
-=item * You've found or written your own template engine which fills your
-needs better than Liquid or Solution ever could.
-
-Psst! Hey, if you haven't found it yet, check the
-L<See Also|Solution/"Other Template Engines"> section.
+=item * You've found or written a template engine which fills your needs
+better than Liquid or Solution ever could.
 
 =item * You are uncomfortable with text that you didn't copy and paste
 yourself. Everyone knows computers cannot be trusted.
 
 =back
 
-=head1 Ugh! Why a new Top Level Namespace?
+=head1 'Solution to what?' or 'Ugh! Why a new Top Level Namespace?'
 
-I really don't have a good reason but I promise to send myself to bed without
-dinner as punishment.
+I really don't have a good reason for claiming a new top level namespace and I
+promise to put myself in timeout as punishment.
 
 As I understand it, the original project's name, Liquid, is a reference to the
 classical states of matter (the engine itself being stateless). I settled on
-L<Solution|Solution> because it's Liquid but... with... bits of other stuff
-floating in it. Pretend you majored in chemistry instead of mathematics or
-computer science and you'll know what I mean.
+L<Solution|http://en.wikipedia.org/wiki/Solution> because it's Liquid but...
+with... bits of other stuff floating in it. Pretend you majored in chemistry
+instead of mathematics or computer science and you'll know what I mean.
 
-This 'solution' is B<not> the answer to all your problems. ...I'll even go
-ahead and say it's not the best solution for your templating problems. It's
-simply I<a> solution.
-
-=head1 See Also
-
-Liquid for Designers: http://wiki.github.com/tobi/liquid/liquid-for-designers
-
-L<Solution::Tag|Solution::Tag/"Create your own filters">'s docs on custom
-filter creation
-
-=head2 Other Template Engines
-
-=over
-
-=item * The L<Template Toolkit|Template> is the granddaddy of all Perl based
-template engines.
-
-=item * ...which would make L<Template::Tiny|Template::Tiny> the weird uncle.
-
-=back
-
-I<Note: This list is obviously incomplete.>
+This 'solution' is B<not> the answer to all your problems and obviously not
+the only solution for your templating troubles. It's simply I<a> solution.
 
 =head1 Author
 
 Sanko Robinson <sanko@cpan.org> - http://sankorobinson.com/
 
-The original Liquid template system was developed by jadedPixel
-(http://jadedpixel.com/) and Tobias Lütke (http://blog.leetsoft.com/).
+CPAN ID: SANKO
+
+=encoding utf8
+
+The original Liquid template system was developed by
+L<jadedPixel|http://jadedpixel.com/> and
+L<Tobias Lütke|http://blog.leetsoft.com/>.
 
 =head1 License and Legal
 
-Copyright (C) 2009,2010 by Sanko Robinson E<lt>sanko@cpan.orgE<gt>
+Copyright (C) 2009,2010 by Sanko Robinson <sanko@cpan.org>
 
 This program is free software; you can redistribute it and/or modify it under
-the terms of The Artistic License 2.0.  See the F<LICENSE> file included with
-this distribution or http://www.perlfoundation.org/artistic_license_2_0.  For
-clarification, see http://www.perlfoundation.org/artistic_2_0_notes.
+the terms of
+L<The Artistic License 2.0|http://www.perlfoundation.org/artistic_license_2_0>.
+See the F<LICENSE> file included with this distribution or
+L<notes on the Artistic License 2.0|http://www.perlfoundation.org/artistic_2_0_notes>
+for clarification.
 
 When separated from the distribution, all original POD documentation is
-covered by the Creative Commons Attribution-Share Alike 3.0 License.  See
-http://creativecommons.org/licenses/by-sa/3.0/us/legalcode.  For
-clarification, see http://creativecommons.org/licenses/by-sa/3.0/us/.
+covered by the
+L<Creative Commons Attribution-Share Alike 3.0 License|http://creativecommons.org/licenses/by-sa/3.0/us/legalcode>.
+See the
+L<clarification of the CCA-SA3.0|http://creativecommons.org/licenses/by-sa/3.0/us/>.
 
-=for git $Id: Solution.pm 7f57e32 2010-09-19 02:51:25Z sanko@cpan.org $
+=for git $Id: Solution.pm 3422f97 2010-09-20 02:24:10Z sanko@cpan.org $
 
 =cut
 {

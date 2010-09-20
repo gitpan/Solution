@@ -2,7 +2,7 @@ package Solution::Tag::Include;
 {
     use strict;
     use warnings;
-    our $MAJOR = 0.0; our $MINOR = 0; our $DEV = -2; our $VERSION = sprintf('%1.3f%03d' . ($DEV ? (($DEV < 0 ? '' : '_') . '%03d') : ('')), $MAJOR, $MINOR, abs $DEV);
+    our $MAJOR = 0.0; our $MINOR = 0; our $DEV = -3; our $VERSION = sprintf('%1.3f%03d' . ($DEV ? (($DEV < 0 ? '' : '_') . '%03d') : ('')), $MAJOR, $MINOR, abs $DEV);
     use lib '../../../lib';
     use Solution::Error;
     use Solution::Utility;
@@ -38,14 +38,15 @@ package Solution::Tag::Include;
     sub render {
         my ($self) = @_;
         my $file = $self->resolve($self->{'file'});
-        return 'Error: Missing template argument' if !defined $file;
+        raise Solution::ArgumentError
+            'Error: Missing or undefined argument passed to include' && return
+            if !defined $file;
         if (   $file !~ m[^[\w\\/\.-_]+$]i
             || $file =~ m[\.[\\/]]
             || $file =~ m[[//\\]\.])
-        {   return
-                sprintf
+        {   raise Solution::ArgumentError sprintf
                 q[Error: Include file '%s' contains invalid characters or sequiences],
-                $file;
+                $file && return;
         }
         $file = File::Spec->catdir(
 
@@ -53,16 +54,18 @@ package Solution::Tag::Include;
             '_includes',
             $file
         );
-        return sprintf 'Error: Included file %s not found', $file
+        raise Solution::FileSystemError sprintf
+            'Error: Included file %s not found', $file
+            && return
             if !-f $file;
         open(my ($FH), '<', $file)
-            || return sprintf 'Error: Cannot include file %s: %s',
-            $file, $!;
+            || raise Solution::FileSystemError sprintf
+            'Error: Cannot include file %s: %s',
+            $file, $! && return;
         sysread($FH, my ($DATA), -s $FH) == -s $FH
-            || return
-            sprintf
+            || raise Solution::FileSystemError sprintf
             'Error: Cannot include file %s (Failed to read %d bytes): %s',
-            $file, -s $FH, $!;
+            $file, -s $FH, $! && return;
         my $partial = Solution::Template->parse($DATA);
         $partial->{'context'} = $self->template->context;
         my $return = $partial->context->stack(sub { $partial->render(); });
@@ -106,7 +109,7 @@ This is a 15m hack and is subject to change ...and may be completly broken.
 
 Liquid for Designers: http://wiki.github.com/tobi/liquid/liquid-for-designers
 
-L<Liquid|Liquid/"Create your own filters">'s docs on custom filter creation
+L<Solution|Solution/"Create your own filters">'s docs on custom filter creation
 
 =head1 Author
 
@@ -117,7 +120,7 @@ The original Liquid template system was developed by jadedPixel
 
 =head1 License and Legal
 
-Copyright (C) 2009 by Sanko Robinson E<lt>sanko@cpan.orgE<gt>
+Copyright (C) 2009,2010 by Sanko Robinson E<lt>sanko@cpan.orgE<gt>
 
 This program is free software; you can redistribute it and/or modify it under
 the terms of The Artistic License 2.0.  See the F<LICENSE> file included with
@@ -129,6 +132,6 @@ covered by the Creative Commons Attribution-Share Alike 3.0 License.  See
 http://creativecommons.org/licenses/by-sa/3.0/us/legalcode.  For
 clarification, see http://creativecommons.org/licenses/by-sa/3.0/us/.
 
-=for git $Id: Include.pm f1e3d96 2010-09-19 02:48:25Z sanko@cpan.org $
+=for git $Id: Include.pm 17e3ce7 2010-09-19 23:14:20Z sanko@cpan.org $
 
 =cut

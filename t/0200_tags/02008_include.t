@@ -24,13 +24,19 @@ is( Solution::Template->parse(
 {%include include%}
 INPUT
 is( Solution::Template->parse(
-        <<'INPUT')->render(), <<'EXPECTED', 'Non existing filenames cause error');
+        <<'INPUT')->render(), <<'EXPECTED', 'Undefined filenames cause error');
 {%include missing%}
 INPUT
-Error: Missing template argument
+
+EXPECTED
+is( Solution::Template->parse(
+        <<'INPUT')->render(), <<'EXPECTED', 'Non existing filenames cause error');
+{%include 'missing' %}
+INPUT
+
 EXPECTED
 
 # I'm finished
 done_testing();
 
-# $Id: 02008_include.t f1e3d96 2010-09-19 02:48:25Z sanko@cpan.org $
+# $Id: 02008_include.t 17e3ce7 2010-09-19 23:14:20Z sanko@cpan.org $

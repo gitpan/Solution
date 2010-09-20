@@ -68,7 +68,7 @@ This is used internally.
 
 Liquid for Designers: http://wiki.github.com/tobi/liquid/liquid-for-designers
 
-L<Liquid|Liquid/"Create your own filters">'s docs on custom filter creation
+L<Solution|Solution/"Create your own filters">'s docs on custom filter creation
 
 =head1 Author
 
@@ -91,6 +91,6 @@ covered by the Creative Commons Attribution-Share Alike 3.0 License.  See
 http://creativecommons.org/licenses/by-sa/3.0/us/legalcode.  For
 clarification, see http://creativecommons.org/licenses/by-sa/3.0/us/.
 
-=for git $Id: Template.pm 7f57e32 2010-09-19 02:51:25Z sanko@cpan.org $
+=for git $Id: Template.pm c79b7e5 2010-09-19 04:43:55Z sanko@cpan.org $
 
 =cut

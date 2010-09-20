@@ -2,7 +2,7 @@ package Solution::Tag::Capture;
 {
     use strict;
     use warnings;
-    our $MAJOR = 0.0; our $MINOR = 0; our $DEV = -1; our $VERSION = sprintf('%1.3f%03d' . ($DEV ? (($DEV < 0 ? '' : '_') . '%03d') : ('')), $MAJOR, $MINOR, abs $DEV);
+    our $MAJOR = 0.0; our $MINOR = 0; our $DEV = -3; our $VERSION = sprintf('%1.3f%03d' . ($DEV ? (($DEV < 0 ? '' : '_') . '%03d') : ('')), $MAJOR, $MINOR, abs $DEV);
     use lib '../../../lib';
     use Solution::Error;
     use Solution::Utility;
@@ -81,7 +81,7 @@ The L<assign|Solution::Tag::Assign> tag.
 
 Liquid for Designers: http://wiki.github.com/tobi/liquid/liquid-for-designers
 
-L<Liquid|Liquid/"Create your own filters">'s docs on custom filter creation
+L<Solution|Solution/"Create your own filters">'s docs on custom filter creation
 
 =head1 Author
 
@@ -104,6 +104,6 @@ covered by the Creative Commons Attribution-Share Alike 3.0 License.  See
 http://creativecommons.org/licenses/by-sa/3.0/us/legalcode.  For
 clarification, see http://creativecommons.org/licenses/by-sa/3.0/us/.
 
-=for git $Id: Capture.pm 7f57e32 2010-09-19 02:51:25Z sanko@cpan.org $
+=for git $Id: Capture.pm c79b7e5 2010-09-19 04:43:55Z sanko@cpan.org $
 
 =cut

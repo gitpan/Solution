@@ -3,7 +3,7 @@ package Solution::Tag;
     use strict;
     use warnings;
     our @ISA = qw[Solution::Document];
-    our $MAJOR = 0.0; our $MINOR = 0; our $DEV = -2; our $VERSION = sprintf('%1.3f%03d' . ($DEV ? (($DEV < 0 ? '' : '_') . '%03d') : ('')), $MAJOR, $MINOR, abs $DEV);
+    our $MAJOR = 0.0; our $MINOR = 0; our $DEV = -3; our $VERSION = sprintf('%1.3f%03d' . ($DEV ? (($DEV < 0 ? '' : '_') . '%03d') : ('')), $MAJOR, $MINOR, abs $DEV);
     sub tag             { return $_[0]->{'tag_name'}; }
     sub end_tag         { return $_[0]->{'end_tag'} || undef; }
     sub conditional_tag { return $_[0]->{'conditional_tag'} || undef; }
@@ -100,8 +100,8 @@ TODO
 =head1 Extending Solution with Custom Tags
 
 To create a new tag, simply inherit from L<Solution::Tag|Solution::Tag> and
-register your block L<globally|Solution/"register_tag"> or locally with
-L<Solution::Template|Solution::Template/"register_tag">.
+register your block L<globally|Solution/"Solution->register_tag( ... )"> or
+locally with L<Solution::Template|Solution::Template/"register_tag">.
 
 Your constructor should expect the following arguments:
 
@@ -195,7 +195,7 @@ find an example C<{^% dump var %}> tag named C<SolutionX::Tag::Dump>.
 Block-like tags are very similar to
 L<simple|Solution::Tag/"Create Your Own Tags">. Inherit from
 L<Solution::Tag|Solution::Tag> and register your block
-L<globally|Liquid/"register_tag"> or locally with
+L<globally|Solution/"register_tag"> or locally with
 L<Solution::Template|Solution::Template/"register_tag">.
 
 The only difference is you define an C<end_tag> in your object.
@@ -270,7 +270,7 @@ The original Liquid template system was developed by jadedPixel
 
 =head1 License and Legal
 
-Copyright (C) 2009 by Sanko Robinson E<lt>sanko@cpan.orgE<gt>
+Copyright (C) 2009,2010 by Sanko Robinson E<lt>sanko@cpan.orgE<gt>
 
 This program is free software; you can redistribute it and/or modify it under
 the terms of The Artistic License 2.0.  See the F<LICENSE> file included with
@@ -282,6 +282,6 @@ covered by the Creative Commons Attribution-Share Alike 3.0 License.  See
 http://creativecommons.org/licenses/by-sa/3.0/us/legalcode.  For
 clarification, see http://creativecommons.org/licenses/by-sa/3.0/us/.
 
-=for git $Id: Tag.pm 7f57e32 2010-09-19 02:51:25Z sanko@cpan.org $
+=for git $Id: Tag.pm 3422f97 2010-09-20 02:24:10Z sanko@cpan.org $
 
 =cut
