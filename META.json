@@ -9,7 +9,8 @@
       "Liquid",
       "Template",
       "Engine",
-      "Solution"
+      "Solution",
+      "stateless"
    ],
    "license" : [
       "artistic_2"
@@ -29,7 +30,7 @@
    "provides" : {
       "Solution" : {
          "file" : "lib/Solution.pm",
-         "version" : "0.000000002"
+         "version" : "0.0004"
       },
       "Solution::ArgumentError" : {
          "file" : "lib/Solution/Error.pm",
@@ -37,15 +38,15 @@
       },
       "Solution::Block" : {
          "file" : "lib/Solution/Block.pm",
-         "version" : "0.000000001"
+         "version" : "0.0001"
       },
       "Solution::Condition" : {
          "file" : "lib/Solution/Condition.pm",
-         "version" : "0.000000001"
+         "version" : "0.0001"
       },
       "Solution::Context" : {
          "file" : "lib/Solution/Context.pm",
-         "version" : "0.000000001"
+         "version" : "0.0001"
       },
       "Solution::ContextError" : {
          "file" : "lib/Solution/Error.pm",
@@ -53,7 +54,7 @@
       },
       "Solution::Document" : {
          "file" : "lib/Solution/Document.pm",
-         "version" : "0.000000001"
+         "version" : "0.0001"
       },
       "Solution::Drop" : {
          "file" : "lib/Solution.pm",
@@ -61,7 +62,7 @@
       },
       "Solution::Error" : {
          "file" : "lib/Solution/Error.pm",
-         "version" : "0.000000001"
+         "version" : "0.0001"
       },
       "Solution::Extensions" : {
          "file" : "lib/Solution.pm",
@@ -73,7 +74,7 @@
       },
       "Solution::Filter::Standard" : {
          "file" : "lib/Solution/Filter/Standard.pm",
-         "version" : "0.000000001"
+         "version" : "0.0001"
       },
       "Solution::FilterNotFound" : {
          "file" : "lib/Solution/Error.pm",
@@ -105,35 +106,35 @@
       },
       "Solution::Tag" : {
          "file" : "lib/Solution/Tag.pm",
-         "version" : "0.000000003"
+         "version" : "0.0003"
       },
       "Solution::Tag::Assign" : {
          "file" : "lib/Solution/Tag/Assign.pm",
-         "version" : "0.000000003"
+         "version" : "0.0003"
       },
       "Solution::Tag::Capture" : {
          "file" : "lib/Solution/Tag/Capture.pm",
-         "version" : "0.000000003"
+         "version" : "0.0003"
       },
       "Solution::Tag::Case" : {
          "file" : "lib/Solution/Tag/Case.pm",
-         "version" : "0.000000001"
+         "version" : "0.0001"
       },
       "Solution::Tag::Comment" : {
          "file" : "lib/Solution/Tag/Comment.pm",
-         "version" : "0.000000003"
+         "version" : "0.0003"
       },
       "Solution::Tag::Cycle" : {
          "file" : "lib/Solution/Tag/Cycle.pm",
-         "version" : "0.000000003"
+         "version" : "0.0003"
       },
       "Solution::Tag::For" : {
          "file" : "lib/Solution/Tag/For.pm",
-         "version" : "0.000000003"
+         "version" : "0.0004"
       },
       "Solution::Tag::If" : {
          "file" : "lib/Solution/Tag/If.pm",
-         "version" : "0.000000001"
+         "version" : "0.0001"
       },
       "Solution::Tag::IfChanged" : {
          "file" : "lib/Solution.pm",
@@ -141,23 +142,23 @@
       },
       "Solution::Tag::Include" : {
          "file" : "lib/Solution/Tag/Include.pm",
-         "version" : "0.000000003"
+         "version" : "0.0003"
       },
       "Solution::Tag::Unless" : {
          "file" : "lib/Solution/Tag/Unless.pm",
-         "version" : "0.000000001"
+         "version" : "0.0001"
       },
       "Solution::Template" : {
          "file" : "lib/Solution/Template.pm",
-         "version" : "0.000000001"
+         "version" : "0.0001"
       },
       "Solution::Utility" : {
          "file" : "lib/Solution/Utility.pm",
-         "version" : "0.000000003"
+         "version" : "0.0003"
       },
       "Solution::Variable" : {
          "file" : "lib/Solution/Variable.pm",
-         "version" : "0.000000003"
+         "version" : "0.0004"
       }
    },
    "release_status" : "stable",
@@ -176,5 +177,5 @@
       },
       "x_ChangeLog" : "http://github.com/sanko/solution/commits/"
    },
-   "version" : "0.000000003"
+   "version" : "0.0004"
 }

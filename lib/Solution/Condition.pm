@@ -2,7 +2,7 @@ package Solution::Condition;
 {
     use strict;
     use warnings;
-    our $MAJOR = 0.0; our $MINOR = 0; our $DEV = -1; our $VERSION = sprintf('%1.3f%03d' . ($DEV ? (($DEV < 0 ? '' : '_') . '%03d') : ('')), $MAJOR, $MINOR, abs $DEV);
+    our $MAJOR = 0.0; our $MINOR = 0; our $DEV = -1; our $VERSION = sprintf('%1d.%02d' . ($DEV ? (($DEV < 0 ? '' : '_') . '%02d') : ('')), $MAJOR, $MINOR, abs $DEV);
     use lib '../../lib';
     use Solution::Error;
     our @ISA = qw[Solution::Block];
@@ -206,6 +206,6 @@ if key exists
 
 
 
-=for git $Id: Condition.pm 7f57e32 2010-09-19 02:51:25Z sanko@cpan.org $
+=for git $Id: Condition.pm 76e9e91 2010-09-21 02:58:26Z sanko@cpan.org $
 
 =cut

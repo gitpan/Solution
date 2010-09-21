@@ -3,7 +3,7 @@ package Solution::Tag;
     use strict;
     use warnings;
     our @ISA = qw[Solution::Document];
-    our $MAJOR = 0.0; our $MINOR = 0; our $DEV = -3; our $VERSION = sprintf('%1.3f%03d' . ($DEV ? (($DEV < 0 ? '' : '_') . '%03d') : ('')), $MAJOR, $MINOR, abs $DEV);
+    our $MAJOR = 0.0; our $MINOR = 0; our $DEV = -3; our $VERSION = sprintf('%1d.%02d' . ($DEV ? (($DEV < 0 ? '' : '_') . '%02d') : ('')), $MAJOR, $MINOR, abs $DEV);
     sub tag             { return $_[0]->{'tag_name'}; }
     sub end_tag         { return $_[0]->{'end_tag'} || undef; }
     sub conditional_tag { return $_[0]->{'conditional_tag'} || undef; }
@@ -282,6 +282,6 @@ covered by the Creative Commons Attribution-Share Alike 3.0 License.  See
 http://creativecommons.org/licenses/by-sa/3.0/us/legalcode.  For
 clarification, see http://creativecommons.org/licenses/by-sa/3.0/us/.
 
-=for git $Id: Tag.pm 3422f97 2010-09-20 02:24:10Z sanko@cpan.org $
+=for git $Id: Tag.pm 76e9e91 2010-09-21 02:58:26Z sanko@cpan.org $
 
 =cut

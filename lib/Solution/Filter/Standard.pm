@@ -2,7 +2,7 @@ package Solution::Filter::Standard;
 {
     use strict;
     use warnings;
-    our $MAJOR = 0.0; our $MINOR = 0; our $DEV = -1; our $VERSION = sprintf('%1.3f%03d' . ($DEV ? (($DEV < 0 ? '' : '_') . '%03d') : ('')), $MAJOR, $MINOR, abs $DEV);
+    our $MAJOR = 0.0; our $MINOR = 0; our $DEV = -1; our $VERSION = sprintf('%1d.%02d' . ($DEV ? (($DEV < 0 ? '' : '_') . '%02d') : ('')), $MAJOR, $MINOR, abs $DEV);
     Solution->register_filter() if $Solution::VERSION;
 
     sub date {
@@ -319,33 +319,29 @@ Simple division.
 
     {{ 10 | divided_by:2 }} => 5
 
-=head1 See Also
-
-Liquid for Designers: http://wiki.github.com/tobi/liquid/liquid-for-designers
-
-L<Solution|Solution/"Create your own filters">'s docs on custom filter creation
-
 =head1 Author
 
 Sanko Robinson <sanko@cpan.org> - http://sankorobinson.com/
 
-The original Liquid template system was developed by jadedPixel
-(http://jadedpixel.com/) and Tobias Lütke (http://blog.leetsoft.com/).
+CPAN ID: SANKO
 
 =head1 License and Legal
 
-Copyright (C) 2009 by Sanko Robinson E<lt>sanko@cpan.orgE<gt>
+Copyright (C) 2009,2010 by Sanko Robinson <sanko@cpan.org>
 
 This program is free software; you can redistribute it and/or modify it under
-the terms of The Artistic License 2.0.  See the F<LICENSE> file included with
-this distribution or http://www.perlfoundation.org/artistic_license_2_0.  For
-clarification, see http://www.perlfoundation.org/artistic_2_0_notes.
+the terms of
+L<The Artistic License 2.0|http://www.perlfoundation.org/artistic_license_2_0>.
+See the F<LICENSE> file included with this distribution or
+L<notes on the Artistic License 2.0|http://www.perlfoundation.org/artistic_2_0_notes>
+for clarification.
 
 When separated from the distribution, all original POD documentation is
-covered by the Creative Commons Attribution-Share Alike 3.0 License.  See
-http://creativecommons.org/licenses/by-sa/3.0/us/legalcode.  For
-clarification, see http://creativecommons.org/licenses/by-sa/3.0/us/.
+covered by the
+L<Creative Commons Attribution-Share Alike 3.0 License|http://creativecommons.org/licenses/by-sa/3.0/us/legalcode>.
+See the
+L<clarification of the CCA-SA3.0|http://creativecommons.org/licenses/by-sa/3.0/us/>.
 
-=for git $Id: Standard.pm 7f57e32 2010-09-19 02:51:25Z sanko@cpan.org $
+=for git $Id: Standard.pm 76e9e91 2010-09-21 02:58:26Z sanko@cpan.org $
 
 =cut

@@ -3,7 +3,7 @@ use warnings;
 use Module::Build;
 use lib 'inc';
 use File::Find qw[find];
-our $MAJOR = 0.0; our $MINOR = 0; our $DEV = -3; our $VERSION = sprintf('%1.3f%03d' . ($DEV ? (($DEV < 0 ? '' : '_') . '%03d') : ('')), $MAJOR, $MINOR, abs $DEV);
+our $MAJOR = 0.0; our $MINOR = 0; our $DEV = -4; our $VERSION = sprintf('%1d.%02d' . ($DEV ? (($DEV < 0 ? '' : '_') . '%02d') : ('')), $MAJOR, $MINOR, abs $DEV);
 $|++;
 my $automated_testing = $ENV{'AUTOMATED_TESTING'}
     || $ENV{'PERL_MM_USE_DEFAULT'};
@@ -38,7 +38,7 @@ my $mb = $class->new(
                         : ()
                        )
     },
-    add_to_cleanup   => [qw[Liquid-*]],
+    add_to_cleanup   => [qw[Solution-*]],
     no_index         => {directory => [qw[examples inc t]]},
     test_files       => \@tests,
     test_file_exts   => ['.t'],
@@ -47,7 +47,7 @@ my $mb = $class->new(
                          rules => {par => ['*']}
     },
     meta_merge     => {
-        keywords  => [qw[Liquid Template Engine Solution]],
+        keywords  => [qw[Liquid Template Engine Solution stateless]],
         resources => {
             bugtracker => {web => 'http://github.com/sanko/solution/issues',
                            mailto => 'sanko@cpan.org'
@@ -77,4 +77,4 @@ sub find_cb {
     return push @tests, $File::Find::name;
 }
 
-# $Id: Build.PL 4d4beee 2010-09-20 02:25:51Z sanko@cpan.org $
+# $Id: Build.PL 76e9e91 2010-09-21 02:58:26Z sanko@cpan.org $
