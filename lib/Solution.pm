@@ -2,15 +2,15 @@ package Solution;
 {
     use strict;
     use warnings;
-    our $MAJOR = 0.0; our $MINOR = 0; our $DEV = -4; our $VERSION = sprintf('%1d.%02d' . ($DEV ? (($DEV < 0 ? '' : '_') . '%02d') : ('')), $MAJOR, $MINOR, abs $DEV);
-
-    #
+    our $VERSION = '0.9.0';
     use Solution::Document;
-    use Solution::Block;
-    use Solution::Condition;
     use Solution::Context;
     use Solution::Tag;
+    use Solution::Block;
+    use Solution::Condition;
     use Solution::Template;
+
+    #
     {    # Load all the tags from the standard library
         require File::Find;
         require File::Spec;
@@ -237,7 +237,7 @@ L<Creative Commons Attribution-Share Alike 3.0 License|http://creativecommons.or
 See the
 L<clarification of the CCA-SA3.0|http://creativecommons.org/licenses/by-sa/3.0/us/>.
 
-=for git $Id: Solution.pm 76e9e91 2010-09-21 02:58:26Z sanko@cpan.org $
+=for git $Id$
 
 =cut
 {

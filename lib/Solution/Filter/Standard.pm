@@ -2,10 +2,11 @@ package Solution::Filter::Standard;
 {
     use strict;
     use warnings;
-    our $MAJOR = 0.0; our $MINOR = 0; our $DEV = -1; our $VERSION = sprintf('%1d.%02d' . ($DEV ? (($DEV < 0 ? '' : '_') . '%02d') : ('')), $MAJOR, $MINOR, abs $DEV);
+    our $VERSION = '0.9.0';
     Solution->register_filter() if $Solution::VERSION;
 
     sub date {
+        $_[0] = time() if lc $_[0] eq 'now' || lc $_[0] eq 'today';
         $_[1] = defined $_[1] ? $_[1] : '%c';
         return $_[0]->strftime($_[1]) if ref $_[0] && $_[0]->can('strftime');
         return if $_[0] !~ m[^\d+$];
@@ -24,6 +25,7 @@ package Solution::Filter::Standard;
         return CORE::join($_[1], keys %{$_[0]}) if ref $_[0] eq 'HASH';
         return $_[0];
     }
+    sub split { [split $_[1], $_[0]] }
 
     sub sort {
         return [sort { $a <=> $b } @{$_[0]}] if ref $_[0] eq 'ARRAY';
@@ -36,7 +38,13 @@ package Solution::Filter::Standard;
         return scalar keys %{$_[0]} if ref $_[0] eq 'HASH';
         return length $_[0];
     }
-    sub strip_html     { $_[0] =~ s[<.*?>][]g;      return $_[0]; }
+
+    sub strip_html {
+        $_[0] =~ s[<.*?>][]g;
+        $_[0] =~ s[<!--.*?-->][]g;
+        $_[0] =~ s[<script.*?<\/script>][]g;
+        return $_[0];
+    }
     sub strip_newlines { $_[0] =~ s[\n][]g;         return $_[0]; }
     sub newline_to_br  { $_[0] =~ s[\n][<br />\n]g; return $_[0]; }
 
@@ -63,8 +71,8 @@ package Solution::Filter::Standard;
         my $l = $length - length($truncate_string);
         $l = 0 if $l < 0;
         return
-            length($data) > $length
-            ? substr($data, 0, $l) . $truncate_string
+            length($data) > $length ?
+            substr($data, 0, $l) . $truncate_string
             : $data;
     }
 
@@ -78,7 +86,8 @@ package Solution::Filter::Standard;
         my $l = $words - 1;
         $l = 0 if $l < 0;
         return $#wordlist > $l
-            ? CORE::join(' ', @wordlist[0 .. $l]) . $truncate_string
+            ?
+            CORE::join(' ', @wordlist[0 .. $l]) . $truncate_string
             : $data;
     }
     sub prepend { return (defined $_[1] ? $_[1] : '') . $_[0]; }
@@ -99,6 +108,21 @@ package Solution::Filter::Standard;
         return $_[0] * $_[1];
     }
     sub divided_by { return $_[0] / $_[1]; }
+
+    sub modulo {
+        return ((defined $_[0] && $_[0] =~ m[[^\d\.]]) ? '' : (defined $_[1]
+                               && $_[1] =~ m[[^\d\.]]) ? $_[0] : $_[0] % $_[1]
+        );
+    }
+
+    #
+    # TODO
+    sub escape {...}    # Escape's HTML
+
+    sub escape_once {
+        ...;
+    } # returns an escaped version of html without affecting existing escaped entities
+    sub map {...}    # map/collect on a given property
 }
 1;
 
@@ -134,6 +158,13 @@ This is the last resort and flags may differ by system so... Buyer beware.
     {{ date | date:'%c' }} => 12/14/2009 2:05:31 AM
 
 =back
+
+The C<date> filter also supports simple replacements of C<'now'> and
+C<'today'> with the current time. For example:
+
+    {{ 'now' | date :'%Y' }}
+
+...would print the current year.
 
 =head2 C<capitalize>
 
@@ -173,6 +204,13 @@ Joins elements of the array with a certain character between them.
     # Where array is [1..6]
     {{ array | join }}      => 1 2 3 4 5 6
     {{ array | join:', ' }} => 1, 2, 3, 4, 5, 6
+
+=head2 C<split>
+
+Split input string into an array of substrings separated by given pattern.
+
+    # Where values is 'foo,bar,baz'
+    {{ values | split ',' | last }} => baz
 
 =head2 C<sort>
 
@@ -319,6 +357,12 @@ Simple division.
 
     {{ 10 | divided_by:2 }} => 5
 
+=head2 C<modulo>
+
+Simple modulo operation.
+
+    {{ 10 | modulo:3 }} => 1
+
 =head1 Author
 
 Sanko Robinson <sanko@cpan.org> - http://sankorobinson.com/
@@ -342,6 +386,6 @@ L<Creative Commons Attribution-Share Alike 3.0 License|http://creativecommons.or
 See the
 L<clarification of the CCA-SA3.0|http://creativecommons.org/licenses/by-sa/3.0/us/>.
 
-=for git $Id: Standard.pm 76e9e91 2010-09-21 02:58:26Z sanko@cpan.org $
+=for git $Id$
 
 =cut

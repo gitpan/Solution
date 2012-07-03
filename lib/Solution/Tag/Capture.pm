@@ -104,6 +104,6 @@ covered by the Creative Commons Attribution-Share Alike 3.0 License.  See
 http://creativecommons.org/licenses/by-sa/3.0/us/legalcode.  For
 clarification, see http://creativecommons.org/licenses/by-sa/3.0/us/.
 
-=for git $Id: Capture.pm 76e9e91 2010-09-21 02:58:26Z sanko@cpan.org $
+=for git $Id$
 
 =cut

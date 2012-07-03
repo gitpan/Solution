@@ -79,10 +79,10 @@ package Solution::Document;
                     }
                 }
                 elsif ($self->can('end_tag') && $tag =~ $self->end_tag) {
+                    $self->{'markup_2'} = $token;
                     last NODE;
                 }
-                elsif (   $self->can('conditional_tag')
-                       && defined $self->conditional_tag
+                elsif (   $self->conditional_tag
                        && $tag =~ $self->conditional_tag)
                 {   $self->push_block({tag_name => $tag,
                                        attrs    => $attrs,
@@ -114,8 +114,8 @@ package Solution::Document;
                     $filter =~ s[\s*$][]; # XXX - the splitter should clean...
                     $filter =~ s[^\s*][]; # XXX -  ...this up for us.
                     my @args
-                        = $args
-                        ? split
+                        = $args ?
+                        split
                         $Solution::Utility::VariableFilterArgumentParser,
                         $args
                         : ();
@@ -146,7 +146,8 @@ package Solution::Document;
         }
         return $return;
     }
+    sub conditional_tag { return $_[0]->{'conditional_tag'} || undef; }
 }
 1;
 
-# $Id: Document.pm 76e9e91 2010-09-21 02:58:26Z sanko@cpan.org $
+# $Id$

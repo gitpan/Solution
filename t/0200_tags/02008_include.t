@@ -39,4 +39,4 @@ EXPECTED
 # I'm finished
 done_testing();
 
-# $Id: 02008_include.t 17e3ce7 2010-09-19 23:14:20Z sanko@cpan.org $
+# $Id$

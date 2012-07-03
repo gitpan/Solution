@@ -39,8 +39,8 @@ package Solution::Tag::Assign;
                 $filter =~ s[\s*$][];    # XXX - the splitter should clean...
                 $filter =~ s[^\s*][];    # XXX -  ...this up for us.
                 my @f_args
-                    = $f_args
-                    ? split $Solution::Utility::VariableFilterArgumentParser,
+                    = $f_args ?
+                    split $Solution::Utility::VariableFilterArgumentParser,
                     $f_args
                     : ();
                 push @{$args->{'filters'}}, [$filter, \@f_args];
@@ -126,6 +126,6 @@ covered by the Creative Commons Attribution-Share Alike 3.0 License.  See
 http://creativecommons.org/licenses/by-sa/3.0/us/legalcode.  For
 clarification, see http://creativecommons.org/licenses/by-sa/3.0/us/.
 
-=for git $Id: Assign.pm 76e9e91 2010-09-21 02:58:26Z sanko@cpan.org $
+=for git $Id$
 
 =cut

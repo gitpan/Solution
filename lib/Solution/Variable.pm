@@ -31,9 +31,6 @@ package Solution::Variable;
         my $val = $self->resolve($self->{'variable'});
     FILTER: for my $filter (@{$self->{'filters'}}) {
             my ($name, $args) = @$filter;
-
-            #use Data::Dump;
-            #ddx $val, $filter; #, $self->template->context->scope;
             map { $_ = $self->resolve($_) || $_ } @$args;
         PACKAGE: for my $package (@{$self->template->filters}) {
                 if (my $call = $package->can($name)) {
@@ -93,6 +90,6 @@ L<Creative Commons Attribution-Share Alike 3.0 License|http://creativecommons.or
 See the
 L<clarification of the CCA-SA3.0|http://creativecommons.org/licenses/by-sa/3.0/us/>.
 
-=for git $Id: Variable.pm 76e9e91 2010-09-21 02:58:26Z sanko@cpan.org $
+=for git $Id$
 
 =cut

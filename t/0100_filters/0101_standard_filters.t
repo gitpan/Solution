@@ -4,6 +4,7 @@ use lib qw[../../lib ../../blib/lib];
 use Test::More;    # Requires 0.94 as noted in Build.PL
 use Solution;
 sub X { Solution::Template->parse(shift)->render(shift) }
+$|++;
 
 # date
 SKIP: {
@@ -26,6 +27,14 @@ SKIP: {
 }
 is(X('{{date|date:"%Y"}}', {date => gmtime(0)}),
     1970, '{{date|date:"%Y"}} => 1970 (int)');
+is( X(q[{{ 'now'|date:"%Y"}}], {}),
+    1900 + [localtime()]->[5],
+    q[{{ 'now'|date:"%Y"}}]
+);
+is( X(q[{{ 'TODAY'|date:"%Y"}}], {}),
+    1900 + [localtime()]->[5],
+    q[{{ 'TODAY'|date:"%Y"}}]
+);
 
 # string/char case
 is(X(q[{{'this is a QUICK test.'|capitalize}}]),
@@ -46,9 +55,9 @@ is(X(q[{{array | last}}], {array => [1 .. 6]}), '6',
     '{{array | last }} => 6');
 is(X(q[{{array | join}}], {array => [1 .. 6]}),
     '1 2 3 4 5 6', '{{array | join }} => 1 2 3 4 5 6');
-is(X(q[{{array | join:", "}}], {array => [1 .. 6]}),
+is(X(q[{{array | join:', '}}], {array => [1 .. 6]}),
     '1, 2, 3, 4, 5, 6',
-    '{{array | join:", " }} => 1, 2, 3, 4, 5, 6');
+    q[{{array | join:', ' }} => 1, 2, 3, 4, 5, 6]);
 note 'For this next test, C<array> is defined as C<[10,62,14,257,65,32]>';
 is(X(q[{{array | sort}}], {array => [10, 62, 14, 257, 65, 32]}),
     '1014326265257', '{{array | sort}} => 1014326265257');
@@ -63,6 +72,10 @@ is( X( q[{{hash | size}}], {hash => {Beatles => 'Apple', Nirvana => 'SubPop'}}
     '2',
     q[{{hash | size}} => 2 (counts keys)]
 );
+
+# split
+is(X(q[{{ values | split: ',' | last }}], {values => 'foo,bar,baz'}),
+    'baz', q[{{ values | split: ',' | last}}]);
 
 # html/web (including the RubyLiquid bugs... ((sigh)))
 is( X(q[{{ '<div>Hello, <em id="whom">world!</em></div>' | strip_html}}]),
@@ -186,7 +199,15 @@ is(X(q[{{ 5|times:4 }}]), '20', q[{{ 5|times:4 }} => 20]);
 # division
 is(X(q[{{ 10 | divided_by:2 }}]), '5', q[{{ 10 | divided_by:2 }} => 5]);
 
+# modulo
+is(X(q[{{ 95 | modulo:6 }}]),   '5', q[{{ 95 | modulo:6 }} => 5]);
+is(X(q[{{ 95 | modulo:6.4 }}]), '5', q[{{ 95 | modulo:6.4 }} => 5]);
+is(X(q[{{ 95.6 | modulo:6 }}]), '5', q[{{ 95.6 | modulo:6 }} => 5]);
+is(X(q[{{ a | modulo:c }}]),    '',  q[{{ a | modulo:c }} => [empty string]]);
+is(X(q[{{ 50 | modulo:c }}]), '50', q[{{ 50 | modulo:c }} => 50]);
+is(X(q[{{ a | modulo:3}}]),   '0',  q[{{ a | modulo:3 }} => 0]);
+
 # I'm finished
 done_testing();
 
-# $Id: 0101_standard_filters.t 4d4beee 2010-09-20 02:25:51Z sanko@cpan.org $
+# $Id$

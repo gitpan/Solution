@@ -1,12 +1,12 @@
-package Solution::Tag::Comment;
+package Solution::Tag::Raw;
 {
     use strict;
     use warnings;
-    our $MAJOR = 0.0; our $MINOR = 0; our $DEV = -3; our $VERSION = sprintf('%1d.%02d' . ($DEV ? (($DEV < 0 ? '' : '_') . '%02d') : ('')), $MAJOR, $MINOR, abs $DEV);
+    our $VERSION = '0.9.0';
     use lib '../../../lib';
     use Solution::Error;
     BEGIN { our @ISA = qw[Solution::Tag]; }
-    Solution->register_tag('comment') if $Solution::VERSION;
+    Solution->register_tag('raw') if $Solution::VERSION;
 
     sub new {
         my ($class, $args) = @_;
@@ -18,23 +18,38 @@ package Solution::Tag::Comment;
                                       fatal   => 1
             }
             if !defined $args->{'parent'};
-        if ($args->{'attrs'}) {
-            raise Solution::SyntaxError {
-                       message => 'Bad argument list in ' . $args->{'markup'},
-                       fatal   => 1
-            };
-        }
-        my $self = bless {name     => '#-' . $1,
-                          nodelist => [],
+        my $self = bless {name     => '?-' . int rand(time),
+                          blocks   => [],
                           tag_name => $args->{'tag_name'},
-                          end_tag  => 'end' . $args->{'tag_name'},
                           template => $args->{'template'},
                           parent   => $args->{'parent'},
-                          markup   => $args->{'markup'}
+                          markup   => $args->{'markup'},
+                          end_tag  => 'end' . $args->{'tag_name'}
         }, $class;
         return $self;
     }
-    sub render { }
+
+    sub render {
+        my ($self) = @_;
+        my $var    = $self->{'variable_name'};
+        my $val    = '';
+        use Data::Dump;
+        return _dump_nodes(@{$self->{'nodelist'}});
+        ddx $self->{'nodelist'};
+    }
+
+    sub _dump_nodes {
+        my $ret = '';
+        for my $node (@_) {
+            my $rendering = ref $node ? $node->{'markup'} : $node;
+            $ret .= defined $rendering ? $rendering : '';
+            $ret .= _dump_nodes(@{$node->{'nodelist'}})
+                if ref $node && $node->{'nodelist'};
+            $ret .= ref $node
+                && defined $node->{'markup_2'} ? $node->{'markup_2'} : '';
+        }
+        return $ret;
+    }
 }
 1;
 
@@ -42,16 +57,34 @@ package Solution::Tag::Comment;
 
 =head1 NAME
 
-Solution::Tag::Comment - General Purpose Content Eater
+Solution::Tag::Raw - General Purpose Content Container
 
 =head1 Synopsis
 
-    I love you{% comment %} and your sister {% endcomment %}.
+    {% raw %}
+    In Handlebars, {{ this }} will be HTML-escaped, but {{{ that }}} will not.
+    {% endraw %}
 
 =head1 Description
 
-C<comment> is the simplest tag. Child nodes are not rendered so it effectivly
-swallows content.
+C<raw> is a simplest tag. Child nodes are rendered as they appear in the
+template. Code inside a C<raw> tag is dumped as-is during rendering. So,
+this...
+
+    {% raw %}
+    {% for article in articles %}
+        <div class='post' id='{{ article.id }}'>
+            <p class='title'>{{ article.title | capitalize }}</p>
+            {% comment %}
+                Unless we're viewing a single article, we will truncate
+                article.body at 50 words and insert a 'Read more' link.
+            {% endcomment %}
+            ...
+        </div>
+    {% endfor %}
+    {% endraw %}
+
+...would print...
 
     {% for article in articles %}
         <div class='post' id='{{ article.id }}'>
@@ -64,21 +97,9 @@ swallows content.
         </div>
     {% endfor %}
 
-Code inside a C<comment> tag is not executed during rendering. So, this...
-
-    {% assign str = 'Initial value' %}
-    {% comment %}
-        {% assign str = 'Different value' %}
-    {% endcomment %}
-    {{ str }}
-
-...would print C<Initial value>.
-
 =head1 See Also
 
 Liquid for Designers: http://wiki.github.com/tobi/liquid/liquid-for-designers
-
-L<Solution|Solution/"Create your own filters">'s docs on custom filter creation
 
 =head1 Author
 
@@ -89,7 +110,7 @@ The original Liquid template system was developed by jadedPixel
 
 =head1 License and Legal
 
-Copyright (C) 2009 by Sanko Robinson E<lt>sanko@cpan.orgE<gt>
+Copyright (C) 2012 by Sanko Robinson E<lt>sanko@cpan.orgE<gt>
 
 This program is free software; you can redistribute it and/or modify it under
 the terms of The Artistic License 2.0.  See the F<LICENSE> file included with

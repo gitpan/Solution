@@ -4,7 +4,7 @@
       "Sanko Robinson <sanko@cpan.org>"
    ],
    "dynamic_config" : 1,
-   "generated_by" : "Conversion, Software version 7.0",
+   "generated_by" : "Module::Build version 0.4, CPAN::Meta::Converter version 2.120921",
    "keywords" : [
       "Liquid",
       "Template",
@@ -27,10 +27,36 @@
          "t"
       ]
    },
+   "prereqs" : {
+      "build" : {
+         "requires" : {
+            "CPAN::Meta::Converter" : "0",
+            "CPAN::Meta::Validator" : "0",
+            "File::Find" : "0",
+            "File::Spec" : "0",
+            "JSON" : "0",
+            "Module::Build" : "0.4",
+            "Perl::Tidy" : "0",
+            "Test::More" : "0.94",
+            "perl" : "5.006001"
+         }
+      },
+      "configure" : {
+         "requires" : {
+            "Module::Build" : "0.4"
+         }
+      },
+      "runtime" : {
+         "requires" : {
+            "File::Spec" : "0",
+            "perl" : "5.006001"
+         }
+      }
+   },
    "provides" : {
       "Solution" : {
          "file" : "lib/Solution.pm",
-         "version" : "0.0004"
+         "version" : "v0.9.0"
       },
       "Solution::ArgumentError" : {
          "file" : "lib/Solution/Error.pm",
@@ -46,7 +72,7 @@
       },
       "Solution::Context" : {
          "file" : "lib/Solution/Context.pm",
-         "version" : "0.0001"
+         "version" : "v0.9.0"
       },
       "Solution::ContextError" : {
          "file" : "lib/Solution/Error.pm",
@@ -74,7 +100,7 @@
       },
       "Solution::Filter::Standard" : {
          "file" : "lib/Solution/Filter/Standard.pm",
-         "version" : "0.0001"
+         "version" : "v0.9.0"
       },
       "Solution::FilterNotFound" : {
          "file" : "lib/Solution/Error.pm",
@@ -144,6 +170,10 @@
          "file" : "lib/Solution/Tag/Include.pm",
          "version" : "0.0003"
       },
+      "Solution::Tag::Raw" : {
+         "file" : "lib/Solution/Tag/Raw.pm",
+         "version" : "v0.9.0"
+      },
       "Solution::Tag::Unless" : {
          "file" : "lib/Solution/Tag/Unless.pm",
          "version" : "0.0001"
@@ -164,18 +194,15 @@
    "release_status" : "stable",
    "resources" : {
       "bugtracker" : {
-         "mailto" : "sanko@cpan.org",
          "web" : "http://github.com/sanko/solution/issues"
       },
       "license" : [
          "http://www.perlfoundation.org/artistic_license_2_0"
       ],
       "repository" : {
-         "type" : "git",
-         "url" : "git://github.com/sanko/solution.git",
-         "web" : "http://github.com/sanko/solution/tree"
+         "url" : "git://github.com/sanko/solution.git"
       },
       "x_ChangeLog" : "http://github.com/sanko/solution/commits/"
    },
-   "version" : "0.0004"
+   "version" : "v0.9.0"
 }
