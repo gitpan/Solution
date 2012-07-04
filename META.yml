@@ -33,33 +33,135 @@ no_index:
     - inc
     - t
 provides:
+  Liquid:
+    file: lib/Solution.pm
+    version: 0
+  Liquid::ArgumentError:
+    file: lib/Solution.pm
+    version: 0
+  Liquid::Block:
+    file: lib/Solution.pm
+    version: 0
+  Liquid::Condition:
+    file: lib/Solution.pm
+    version: 0
+  Liquid::Context:
+    file: lib/Solution.pm
+    version: 0
+  Liquid::ContextError:
+    file: lib/Solution.pm
+    version: 0
+  Liquid::Document:
+    file: lib/Solution.pm
+    version: 0
+  Liquid::Drop:
+    file: lib/Solution.pm
+    version: 0
+  Liquid::Error:
+    file: lib/Solution.pm
+    version: 0
+  Liquid::Extensions:
+    file: lib/Solution.pm
+    version: 0
+  Liquid::FileSystemError:
+    file: lib/Solution.pm
+    version: 0
+  Liquid::Filter::Standard:
+    file: lib/Solution.pm
+    version: 0
+  Liquid::FilterNotFound:
+    file: lib/Solution.pm
+    version: 0
+  Liquid::HTMLTags:
+    file: lib/Solution.pm
+    version: 0
+  Liquid::Module_Ex:
+    file: lib/Solution.pm
+    version: 0
+  Liquid::StackLevelError:
+    file: lib/Solution.pm
+    version: 0
+  Liquid::StandardError:
+    file: lib/Solution.pm
+    version: 0
+  Liquid::Strainer:
+    file: lib/Solution.pm
+    version: 0
+  Liquid::SyntaxError:
+    file: lib/Solution.pm
+    version: 0
+  Liquid::Tag:
+    file: lib/Solution.pm
+    version: 0
+  Liquid::Tag::Assign:
+    file: lib/Solution.pm
+    version: 0
+  Liquid::Tag::Capture:
+    file: lib/Solution.pm
+    version: 0
+  Liquid::Tag::Case:
+    file: lib/Solution.pm
+    version: 0
+  Liquid::Tag::Comment:
+    file: lib/Solution.pm
+    version: 0
+  Liquid::Tag::Cycle:
+    file: lib/Solution.pm
+    version: 0
+  Liquid::Tag::For:
+    file: lib/Solution.pm
+    version: 0
+  Liquid::Tag::If:
+    file: lib/Solution.pm
+    version: 0
+  Liquid::Tag::IfChanged:
+    file: lib/Solution.pm
+    version: 0
+  Liquid::Tag::Include:
+    file: lib/Solution.pm
+    version: 0
+  Liquid::Tag::Raw:
+    file: lib/Solution.pm
+    version: 0
+  Liquid::Tag::Unless:
+    file: lib/Solution.pm
+    version: 0
+  Liquid::Template:
+    file: lib/Solution.pm
+    version: 0
+  Liquid::Utility:
+    file: lib/Solution.pm
+    version: 0
+  Liquid::Variable:
+    file: lib/Solution.pm
+    version: 0
   Solution:
     file: lib/Solution.pm
-    version: v0.9.0
+    version: v0.9.1
   Solution::ArgumentError:
     file: lib/Solution/Error.pm
     version: 0
   Solution::Block:
     file: lib/Solution/Block.pm
-    version: 0.0001
+    version: v0.9.1
   Solution::Condition:
     file: lib/Solution/Condition.pm
-    version: 0.0001
+    version: v0.9.1
   Solution::Context:
     file: lib/Solution/Context.pm
-    version: v0.9.0
+    version: v0.9.1
   Solution::ContextError:
     file: lib/Solution/Error.pm
     version: 0
   Solution::Document:
     file: lib/Solution/Document.pm
-    version: 0.0001
+    version: v0.9.1
   Solution::Drop:
     file: lib/Solution.pm
     version: 0
   Solution::Error:
     file: lib/Solution/Error.pm
-    version: 0.0001
+    version: v0.9.1
   Solution::Extensions:
     file: lib/Solution.pm
     version: 0
@@ -68,7 +170,7 @@ provides:
     version: 0
   Solution::Filter::Standard:
     file: lib/Solution/Filter/Standard.pm
-    version: v0.9.0
+    version: v0.9.1
   Solution::FilterNotFound:
     file: lib/Solution/Error.pm
     version: 0
@@ -92,49 +194,49 @@ provides:
     version: 0
   Solution::Tag:
     file: lib/Solution/Tag.pm
-    version: 0.0003
+    version: v0.9.1
   Solution::Tag::Assign:
     file: lib/Solution/Tag/Assign.pm
-    version: 0.0003
+    version: v0.9.1
   Solution::Tag::Capture:
     file: lib/Solution/Tag/Capture.pm
-    version: 0.0003
+    version: v0.9.1
   Solution::Tag::Case:
     file: lib/Solution/Tag/Case.pm
-    version: 0.0001
+    version: v0.9.1
   Solution::Tag::Comment:
     file: lib/Solution/Tag/Comment.pm
-    version: 0.0003
+    version: v0.9.1
   Solution::Tag::Cycle:
     file: lib/Solution/Tag/Cycle.pm
-    version: 0.0003
+    version: v0.9.1
   Solution::Tag::For:
     file: lib/Solution/Tag/For.pm
-    version: 0.0004
+    version: v0.9.1
   Solution::Tag::If:
     file: lib/Solution/Tag/If.pm
-    version: 0.0001
+    version: v0.9.1
   Solution::Tag::IfChanged:
     file: lib/Solution.pm
     version: 0
   Solution::Tag::Include:
     file: lib/Solution/Tag/Include.pm
-    version: 0.0003
+    version: v0.9.1
   Solution::Tag::Raw:
     file: lib/Solution/Tag/Raw.pm
-    version: v0.9.0
+    version: v0.9.1
   Solution::Tag::Unless:
     file: lib/Solution/Tag/Unless.pm
-    version: 0.0001
+    version: v0.9.1
   Solution::Template:
     file: lib/Solution/Template.pm
-    version: 0.0001
+    version: v0.9.1
   Solution::Utility:
     file: lib/Solution/Utility.pm
-    version: 0.0003
+    version: v0.9.1
   Solution::Variable:
     file: lib/Solution/Variable.pm
-    version: 0.0004
+    version: v0.9.1
 requires:
   File::Spec: 0
   perl: 5.006001
@@ -143,4 +245,4 @@ resources:
   license: http://www.perlfoundation.org/artistic_license_2_0
   repository: git://github.com/sanko/solution.git
   x_ChangeLog: http://github.com/sanko/solution/commits/
-version: v0.9.0
+version: v0.9.1
